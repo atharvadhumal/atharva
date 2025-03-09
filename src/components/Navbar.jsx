@@ -12,8 +12,8 @@ const Navbar = () => {
         <div className=' flex justify-between items-center py-2 sm:py-3 px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12 backdrop-blur-lg border-b border-neutral-700/80'>
           {/* logo sec */}
           <div className='flex items-center gap-1 sm:gap-2 font-bold'>
-            <img src={atharvalogo} className='w-7 sm:w-8 md:w-10' alt="" />
-            <p className='text-white text-sm sm:text-base md:text-xl whitespace-nowrap'>Atharva Dhumal</p>
+            <img src={atharvalogo} className='w-8 sm:w-10 md:w-12' alt="" />
+            
           </div>
           
           {/* desktop menu sec */}

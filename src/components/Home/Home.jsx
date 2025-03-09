@@ -7,7 +7,7 @@ import { BiCoffeeTogo } from "react-icons/bi";
 import Avatar from '../../assets/Avatar.png';
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-
+import { SiGmail } from "react-icons/si";
 
 const Home = () => {
     return (
@@ -112,6 +112,10 @@ const Home = () => {
                                 <a href="http://www.linkedin.com/in/atharvadhumal24" target="_blank"
                                     className="bg-white rounded-full p-3 w-12 h-12 flex items-center justify-center hover:bg-purple-300 transition-colors duration-300">
                                     <FaLinkedin size={24} className="text-purple-900" />
+                                </a>
+                                <a href="mailto:atharvadhumal256@gmail.com" 
+                                    className="bg-white rounded-full p-3 w-12 h-12 flex items-center justify-center hover:bg-purple-300 transition-colors duration-300">
+                                    <SiGmail  size={24} className="text-purple-900" />
                                 </a>
 
                             </div>
