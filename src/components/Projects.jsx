@@ -1,9 +1,114 @@
-import React from 'react'
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ExternalLink } from 'lucide-react';
+import { FaGithub } from "react-icons/fa";
+import portfolio from '../assets/portfolio.png';
+import store from '../assets/store.png';
+import nexus from '../assets/nexus.png'
 
 const Projects = () => {
-  return (
-    <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad earum cumque quidem ut tempore, dicta similique molestias impedit! Vitae aspernatur ipsa non consequatur obcaecati enim, praesentium nesciunt nobis aperiam ab veritatis cupiditate, dolor sunt, perspiciatis porro similique consectetur saepe. Mollitia ducimus perspiciatis iste est animi minima voluptatibus fuga fugiat. Itaque officia placeat eius, provident animi sed doloribus nostrum accusamus nulla asperiores fuga dolorem. Blanditiis, dolor dicta? Quas placeat, neque distinctio deserunt sequi repellendus saepe nesciunt magni exercitationem natus tenetur provident adipisci earum assumenda deleniti perferendis ratione ut fugiat voluptates, tempora dignissimos minima nobis numquam delectus. Non ut mollitia quibusdam enim? Magnam amet autem optio porro natus cupiditate atque. Corporis tempora repellat cum aliquam ducimus animi sunt voluptate rem amet quos, nesciunt, dolorum voluptas quibusdam, iure dolore. Itaque rerum quis, dolores vel ipsum temporibus. Saepe explicabo magnam, praesentium accusamus officiis exercitationem. Qui, voluptatem libero? Obcaecati nostrum beatae inventore tempora natus, laboriosam atque necessitatibus corrupti omnis culpa, eum exercitationem. Magni facere perspiciatis eum exercitationem dolor sed beatae voluptatem obcaecati dicta nesciunt porro pariatur libero accusamus atque, incidunt eius omnis voluptas praesentium eveniet cum sint excepturi molestiae? Quia possimus, praesentium quod aperiam adipisci odio rem, nobis dolores maiores, mollitia ipsa amet voluptatum? Perspiciatis, dignissimos dicta recusandae minima temporibus assumenda voluptates expedita sit esse atque necessitatibus. Doloribus inventore delectus veniam neque alias assumenda repellat tempora omnis, dicta minima? Quo, modi dolor et veniam sint unde iusto doloremque sequi impedit temporibus beatae autem libero recusandae totam iure, eos alias ea rem neque quisquam ab omnis reiciendis. Labore distinctio, minus officiis obcaecati provident in quaerat voluptatibus expedita quod recusandae, dolorum ipsa eligendi vel suscipit ea cum? Facere asperiores impedit ut expedita laudantium, iste adipisci maxime, suscipit neque modi blanditiis pariatur perspiciatis fuga dicta dignissimos perferendis ipsam! Aliquam doloribus in culpa a dolorum voluptatum officia enim, est, mollitia veniam fugiat earum tenetur ea quo? Sint voluptates nulla nam minima iusto est quos, quia consequatur qui possimus dignissimos porro aliquid hic nihil quas consequuntur doloremque illum vero maiores, eum repellendus at! A consectetur est ipsum porro vero accusamus perferendis nemo. Iusto eveniet voluptatibus fugiat perspiciatis ipsam, tenetur at voluptatem praesentium vel aliquid, nihil, mollitia aut labore repellendus officiis qui impedit unde in fuga sunt accusamus reprehenderit sed maxime. Ratione, repellat. Harum quia nobis iure tempore atque ipsum eum dolore reprehenderit, temporibus nisi, iste animi dolor. Ipsa id tenetur quibusdam doloremque voluptas veniam ad cumque, facilis voluptatem aliquam debitis molestias exercitationem distinctio earum necessitatibus quia ut culpa laudantium saepe ducimus amet eius voluptatibus. Cupiditate aliquam eos culpa quos alias quae eius labore officia consectetur numquam amet libero similique debitis ut maiores quas voluptates ipsam nam deserunt, exercitationem tempore nulla illum illo. Provident amet qui, hic quisquam eos beatae non! Corporis, consequatur. Nemo fuga quasi eveniet, pariatur cupiditate esse accusamus at excepturi mollitia alias commodi, laboriosam assumenda quibusdam quaerat velit saepe corrupti enim facere eligendi minima! Tempora, ipsa ullam! Molestias obcaecati deserunt eius, odit repudiandae optio porro debitis voluptate alias magnam aut assumenda delectus. Atque sequi fugit rem itaque esse.</div>
-  )
-}
+  const projectsList = [
+    {
+      id: 1,
+      name: "Postgrestore | Full-Stack E-Commerce Application",
+      description: "Developed a full-stack e-commerce product management system with React frontend and Node.js/Express backend. The application features responsive UI built with Tailwind CSS, backed by PostgreSQL via Neon's serverless database.",
+      technologies: "React, Node.js, Express, PostgreSQL, Neon DB, Zustand, Tailwind CSS, Framer Motion, Arcjet, Axios",
+      image: store,
+      liveUrl: "https://postgrestore-frontend.vercel.app/",
+      githubUrl: "https://github.com/atharvadhumal/postgrestore-frontend"
+    },
+    {
+      id: 2,
+      name: "Portfolio Website",
+      description: "Created a responsive personal portfolio website using React.js and Vite to showcase my projects and skills. The website features Modern UI with responsive design using Tailwind CSS for mobile and desktop experiences.",
+      technologies: "React.js, Vite, Tailwind CSS, React Router, Lottie animations, React Icons, React Typewriter Effect, Parallax Tilt",
+      image: portfolio,
+      liveUrl: "https://atharvadhumal.vercel.app/",
+      githubUrl: "https://github.com/atharvadhumal/atharva"
+    },
+    {
+      id: 3,
+      name: "Nexus Engineering",
+      description: "Developed a responsive, modern website for Nexus Engineering using React.js, React Router, and TailwindCSS. Built a multi-page application with router implementation for Home, About, Services, and Contact pages.Integrated JSON data management for dynamic service content rendering",
+      technologies: "React.js, Vite, Tailwind CSS, React Router, Lottie animations, React Icons, React Typewriter Effect, Parallax Tilt",
+      image: nexus,
+      liveUrl: "https://www.nexus-eng.in/",
+      githubUrl: "https://github.com/atharvadhumal/Nexus"
+    }
+  ];
 
-export default Projects
+  return (
+    <section id="projects" className="py-16">
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
+          My Projects
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projectsList.map((project) => (
+            <motion.div
+              key={project.id}
+              className="rounded-lg overflow-hidden bg-gray-800 border border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+            >
+              <figure className="h-56 overflow-hidden border-b border-gray-700">
+                <img
+                  src={project.image}
+                  alt={project.name}
+                  className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-105"
+                />
+              </figure>
+              
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-white mb-3">{project.name}</h3>
+                <p className="text-gray-300 mb-4 line-clamp-3">{project.description}</p>
+                
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.technologies.split(', ').slice(0, 4).map((tech) => (
+                    <span 
+                      key={tech} 
+                      className="inline-block bg-gray-800 text-purple-400 border border-purple-500 px-3 py-1 rounded-full text-xs"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                  {project.technologies.split(', ').length > 4 && (
+                    <span className="inline-block bg-gray-800 text-gray-300 border border-gray-600 px-3 py-1 rounded-full text-xs">
+                      +{project.technologies.split(', ').length - 4}
+                    </span>
+                  )}
+                </div>
+                
+                <div className="flex justify-end gap-3 mt-4">
+                  <a 
+                    href={project.githubUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 px-4 py-2 border border-gray-700 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
+                  >
+                    <FaGithub size={16} />
+                    <span>Code</span>
+                  </a>
+                  <a 
+                    href={project.liveUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 px-4 py-2 bg-purple-500 hover:bg-purple-600 rounded-md text-sm font-medium text-white transition-colors"
+                  >
+                    <ExternalLink size={16} />
+                    <span>Live Demo</span>
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Projects;

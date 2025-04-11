@@ -2,6 +2,7 @@ import React from 'react'
 import { VscVscode } from "react-icons/vsc";
 import { IoLogoVercel } from "react-icons/io5";
 import { FaGithub } from "react-icons/fa";
+import { SiSlack } from "react-icons/si";
 
 
 const Toolstack = () => {
@@ -9,6 +10,7 @@ const Toolstack = () => {
     'VS code': <VscVscode className="text-5xl"/>,
     'Vercel': <IoLogoVercel className="text-5xl"/>,
     'Github': <FaGithub className="text-5xl"/>,
+    'Slack': <SiSlack className="text-5xl"/>,
   }
   return (
     <section className="py-12 px-4">
