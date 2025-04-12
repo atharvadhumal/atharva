@@ -9,8 +9,8 @@ import Github from './Github';
 const About = () => {
   return (
     <>
-    <section className="min-h-screen flex items-center px-4 md:px-8 lg:px-12">
-      <div className="w-full max-w-6xl mx-auto">
+    <section className="py-12 md:py-16 px-6 md:px-10 lg:px-16 flex items-center">
+      <div className="w-full max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div className='text-white'>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
@@ -39,27 +39,22 @@ const About = () => {
             </div>
           </div>
 
-          <Tilt>
-            <div className="flex justify-center md:justify-end">
-            <div className="w-full max-w-xl xl:max-w-2xl transform scale-160 md:scale-160">
-                <DotLottieReact
-                  src="https://lottie.host/80ec9b4f-7745-42e5-ab9f-08a8580bbd99/Lg8tSVAj6n.json"
-                  loop
-                  autoplay
-                />
-              </div>
-            </div>
-          </Tilt>
+          <div className="flex justify-center items-center">
+            <Tilt tiltMaxAngleX={15} tiltMaxAngleY={15} perspective={800} scale={1.05} className="w-full max-w-md">
+              <DotLottieReact
+                src="https://lottie.host/80ec9b4f-7745-42e5-ab9f-08a8580bbd99/Lg8tSVAj6n.json"
+                loop
+                autoplay
+              />
+            </Tilt>
+          </div>
         </div>
       </div>
     </section>
 
-
-
     <Techstack/>
     <Toolstack/>
     <Github/>
-
     </>
   )
 }

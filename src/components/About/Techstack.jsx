@@ -16,8 +16,8 @@ const Techstack = () => {
   }
 
   return (
-    <section className="py-12 px-4">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-12 px-6 md:px-10 lg:px-16">
+      <div className="max-w-7xl mx-auto">
         <div className='text-white text-center mb-10'>
           <h1 className="text-3xl md:text-4xl font-bold">
             Professional <span className='text-purple-500'>Skillset</span>
@@ -33,7 +33,7 @@ const Techstack = () => {
               <div className="text-white hover:text-purple-500 transition-colors duration-500">
                 {icon}
               </div>
-              <p className="mt-4 text-white font-medium">{skill}</p>
+              <p className="mt-4 text-white font-mediuam">{skill}</p>
             </div>
           ))}
         </div>
