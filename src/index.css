@@ -1,44 +1,167 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import "tailwindcss";
 
+@theme {
+  --font-sans: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
-body {
-  margin: 0;
-  font-family: "Poppins", serif !important;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-image: linear-gradient(to left, rgba(27, 20, 41, 1), rgba(20, 15, 35, 0.9)),
-    url('./assets/home-bg.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: repeat;
+  --color-bg: #09090b;
+  --color-surface: #111113;
+  --color-elevated: #18181b;
+  --color-border: #27272a;
+  --color-text: #fafafa;
+  --color-muted: #a1a1aa;
+  --color-dim: #71717a;
+  --color-accent: #e4e4e7;
+}
 
-  min-height: 100vh;
-  height: 100%;
-  width: 100%;
+* {
+  box-sizing: border-box;
 }
 
 html {
-  height: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
 }
 
-@keyframes wave {
-  0% { transform: rotate(0deg); }
-  10% { transform: rotate(14deg); }
-  20% { transform: rotate(-8deg); }
-  30% { transform: rotate(14deg); }
-  40% { transform: rotate(-4deg); }
-  50% { transform: rotate(10deg); }
-  60% { transform: rotate(0deg); }
-  100% { transform: rotate(0deg); }
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: 6.5rem;
+  }
 }
 
-.animate-wave {
-  animation: wave 2.5s infinite;
-  transform-origin: 70% 70%;
-}
-
-html, body {
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+}
+
+/* Soft depth — not flat pure black */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255, 255, 255, 0.04), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 100% 50%, rgba(255, 255, 255, 0.02), transparent 50%);
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+  overflow-x: clip;
+}
+
+::selection {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.shell {
+  width: min(1080px, calc(100% - 1.5rem));
+  margin-inline: auto;
+}
+
+@media (min-width: 480px) {
+  .shell {
+    width: min(1080px, calc(100% - 2rem));
+  }
+}
+
+@media (min-width: 768px) {
+  .shell {
+    width: min(1080px, calc(100% - 2.5rem));
+  }
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.field {
+  width: 100%;
   max-width: 100%;
+  background: color-mix(in srgb, var(--color-bg) 55%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  outline: none;
+  backdrop-filter: blur(8px);
+  transition: border-color 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  .field {
+    font-size: 0.95rem;
+  }
+}
+
+.field:focus {
+  border-color: #52525b;
+}
+
+.field::placeholder {
+  color: var(--color-dim);
+}
+
+.Typewriter__cursor {
+  color: var(--color-muted);
+}
+
+@keyframes site-twinkle {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.site-star,
+.site-star-bright {
+  animation-name: site-twinkle;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.site-star-bright {
+  opacity: 0.85;
+}
+
+/* GitHub calendar — keep natural block size; scroll on overflow */
+.github-calendar-wrap {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+.github-calendar-inner .react-activity-calendar {
+  max-width: none;
+}
+
+.github-calendar-inner .react-activity-calendar text {
+  fill: var(--color-dim) !important;
+  font-size: 11px !important;
+}
+
+.react-activity-calendar text {
+  fill: var(--color-dim) !important;
+}
+
+/* Safe area for notched phones */
+@supports (padding: env(safe-area-inset-top)) {
+  .safe-top {
+    padding-top: max(1.25rem, env(safe-area-inset-top));
+  }
 }

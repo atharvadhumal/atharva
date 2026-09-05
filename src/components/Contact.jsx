@@ -1,114 +1,119 @@
-import React, { useRef, useState } from 'react';
-import emailjs from '@emailjs/browser';
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import { TbSend } from "react-icons/tb";
+import { useRef, useState } from "react";
+import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
+import { useSectionInView } from "../hooks/useSectionInView";
+import { socials } from "../constants/data";
 
-const Contact = () => {
-  const form = useRef();
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isError, setIsError] = useState(false);
+export default function Contact() {
+  const { ref } = useSectionInView("Contact");
+  const formRef = useRef(null);
+  const [status, setStatus] = useState("idle");
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
-    setIsSubmitted(false);
-    setIsError(false);
+    setStatus("sending");
 
     const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
     const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
     const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
-    emailjs
-      .sendForm(serviceId, templateId, form.current, {
-        publicKey: publicKey,
-      })
-      .then(
-        () => {
-          console.log('SUCCESS!');
-          setIsSubmitted(true);
-          form.current.reset();
-        },
-        (error) => {
-          console.log('FAILED...', error.text);
-          setIsError(true);
-        },
-      );
+    if (!serviceId || !templateId || !publicKey) {
+      setStatus("error");
+      return;
+    }
+
+    try {
+      await emailjs.sendForm(serviceId, templateId, formRef.current, { publicKey });
+      setStatus("success");
+      formRef.current.reset();
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 md:px-8 lg:px-12 py-12">
-      <div className="w-full max-w-md mx-auto">
-        <div className="text-white">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-center">
-            Got a cool <span className="text-purple-500">idea</span> that needs digital implementation?
-          </h1>
-          
-          <div className="text-lg leading-relaxed space-y-4 mb-8 text-center">
-            <p>
-              Feel free to <span className="text-purple-500 font-semibold">reach out</span> if you have a project in mind or just want to <span className="text-purple-500 font-semibold">connect</span>. I'm always open to discussing new opportunities and collaborations.
-            </p>
-            <p>
-              Fill out the form with your details, and I'll get back to you as soon as possible!
-            </p>
-          </div>
+    <section
+      ref={ref}
+      id="contact"
+      className="scroll-mt-24 border-t border-border py-16 sm:scroll-mt-28 sm:py-20 md:py-32"
+    >
+      <div className="shell grid gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-20">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <p className="mono text-[11px] tracking-[0.18em] text-dim uppercase sm:text-xs">
+            Contact
+          </p>
+          <h2 className="mt-3 text-2xl font-semibold tracking-tight text-text sm:mt-4 sm:text-3xl md:text-4xl">
+            Let&apos;s work together
+          </h2>
+          <p className="mt-3 max-w-md text-[0.95rem] text-muted sm:mt-4 sm:text-base">
+            Have a project or opportunity? Drop a message — I usually reply within a day.
+          </p>
 
-          <form 
-            ref={form} 
-            onSubmit={sendEmail} 
-            className="space-y-4 bg-gray-900 p-6 rounded-lg border border-gray-700 shadow-md"
+          <ul className="mt-8 space-y-4 text-sm sm:mt-10">
+            {[
+              { label: "Email", value: socials.email, href: `mailto:${socials.email}` },
+              { label: "GitHub", value: "atharvadhumal", href: socials.github },
+              { label: "LinkedIn", value: "atharvadhumal24", href: socials.linkedin },
+            ].map((item) => (
+              <li key={item.label} className="min-w-0">
+                <span className="mono text-[11px] text-dim uppercase">{item.label}</span>
+                <a
+                  href={item.href}
+                  target={item.href.startsWith("http") ? "_blank" : undefined}
+                  rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="mt-0.5 block break-all text-text transition hover:text-muted"
+                >
+                  {item.value}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+
+        <motion.form
+          ref={formRef}
+          onSubmit={sendEmail}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.08 }}
+          className="flex w-full min-w-0 flex-col gap-3 sm:gap-4"
+        >
+          <input name="user_name" required placeholder="Name" autoComplete="name" className="field" />
+          <input
+            type="email"
+            name="user_email"
+            required
+            placeholder="Email"
+            autoComplete="email"
+            className="field"
+          />
+          <textarea
+            name="message"
+            required
+            rows={5}
+            placeholder="Message"
+            className="field resize-y"
+          />
+          <button
+            type="submit"
+            disabled={status === "sending"}
+            className="mt-1 min-h-11 w-full rounded-full bg-text px-7 py-3 text-sm font-medium text-bg transition hover:bg-accent disabled:opacity-60 sm:mt-2 sm:w-fit"
           >
-            <div className="flex flex-col">
-              <label className="text-purple-500 mb-2 font-medium">Name</label>
-              <input 
-                type="text" 
-                name="user_name" 
-                required
-                className="bg-gray-800 border border-gray-700 rounded-md p-3 text-white focus:outline-none focus:border-purple-500 transition-colors"
-              />
-            </div>
-            
-            <div className="flex flex-col">
-              <label className="text-purple-500 mb-2 font-medium">Email</label>
-              <input 
-                type="email" 
-                name="user_email"
-                required 
-                className="bg-gray-800 border border-gray-700 rounded-md p-3 text-white focus:outline-none focus:border-purple-500 transition-colors"
-              />
-            </div>
-            
-            <div className="flex flex-col">
-              <label className="text-purple-500 mb-2 font-medium">Message</label>
-              <textarea 
-                name="message"
-                required
-                rows="5"
-                className="bg-gray-800 border border-gray-700 rounded-md p-3 text-white focus:outline-none focus:border-purple-500 transition-colors"
-              />
-            </div>
-            
-            <button 
-              type="submit" 
-              className="w-full bg-purple-500 hover:bg-purple-600 text-white font-medium py-3 px-4 rounded-md transition-colors duration-300 flex items-center justify-center"
-            >
-              <TbSend className="mr-2" /> Send Message
-            </button>
-
-            {isSubmitted && (
-              <div className="bg-green-500 bg-opacity-20 border border-green-500 p-3 rounded-md text-center text-white">
-                Message sent successfully!
-              </div>
-            )}
-            
-            {isError && (
-              <div className="bg-red-500 bg-opacity-20 border border-red-500 text-red-400 p-3 rounded-md text-center">
-                Failed to send message. Please try again.
-              </div>
-            )}
-          </form>
-        </div>
+            {status === "sending" ? "Sending…" : "Send message"}
+          </button>
+          {status === "success" && (
+            <p className="text-sm text-muted">Message sent. Thanks!</p>
+          )}
+          {status === "error" && (
+            <p className="text-sm text-muted">Couldn&apos;t send — email me directly.</p>
+          )}
+        </motion.form>
       </div>
     </section>
   );
-};
-
-export default Contact;
+}

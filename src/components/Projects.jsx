@@ -1,114 +1,125 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
-import { FaGithub } from "react-icons/fa";
-import portfolio from '../assets/portfolio.png';
-import store from '../assets/store.png';
-import nexus from '../assets/nexus.png'
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
+import { useSectionInView } from "../hooks/useSectionInView";
+import { projects } from "../constants/data";
 
-const Projects = () => {
-  const projectsList = [
-    {
-      id: 1,
-      name: "Postgrestore | Full-Stack E-Commerce Application",
-      description: "Developed a full-stack e-commerce product management system with React frontend and Node.js/Express backend. The application features responsive UI built with Tailwind CSS, backed by PostgreSQL via Neon's serverless database.",
-      technologies: "React, Node.js, Express, PostgreSQL, Neon DB, Zustand, Tailwind CSS, Framer Motion, Arcjet, Axios",
-      image: store,
-      liveUrl: "https://postgrestore-frontend.vercel.app/",
-      githubUrl: "https://github.com/atharvadhumal/postgrestore-frontend"
-    },
-    {
-      id: 2,
-      name: "Portfolio Website",
-      description: "Created a responsive personal portfolio website using React.js and Vite to showcase my projects and skills. The website features Modern UI with responsive design using Tailwind CSS for mobile and desktop experiences.",
-      technologies: "React.js, Vite, Tailwind CSS, React Router, Lottie animations, React Icons, React Typewriter Effect, Parallax Tilt",
-      image: portfolio,
-      liveUrl: "https://atharvadhumal.vercel.app/",
-      githubUrl: "https://github.com/atharvadhumal/atharva"
-    },
-    {
-      id: 3,
-      name: "Nexus Engineering",
-      description: "Developed a responsive, modern website for Nexus Engineering using React.js, React Router, and TailwindCSS. Built a multi-page application with router implementation for Home, About, Services, and Contact pages.Integrated JSON data management for dynamic service content rendering",
-      technologies: "React.js, Vite, Tailwind CSS, React Router, Lottie animations, React Icons, React Typewriter Effect, Parallax Tilt",
-      image: nexus,
-      liveUrl: "https://www.nexus-eng.in/",
-      githubUrl: "https://github.com/atharvadhumal/Nexus"
-    }
-  ];
+export default function Projects() {
+  const { ref } = useSectionInView("Work");
 
   return (
-    <section id="projects" className="py-16">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
-          My Projects
-        </h2>
+    <section
+      ref={ref}
+      id="work"
+      className="scroll-mt-24 border-t border-border py-16 sm:scroll-mt-28 sm:py-20 md:py-32"
+    >
+      <div className="shell">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-8 max-w-lg sm:mb-12 md:mb-14"
+        >
+          <p className="mono text-[11px] tracking-[0.18em] text-dim uppercase sm:text-xs">Work</p>
+          <h2 className="mt-3 text-2xl font-semibold tracking-tight text-text sm:mt-4 sm:text-3xl md:text-4xl">
+            Selected projects
+          </h2>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projectsList.map((project) => (
-            <motion.div
-              key={project.id}
-              className="rounded-lg overflow-hidden bg-gray-800 border border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300"
-              initial={{ opacity: 0, y: 20 }}
+        <div className="flex flex-col gap-4 sm:gap-6">
+          {projects.map((project, index) => (
+            <motion.article
+              key={project.title}
+              initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, delay: index * 0.06 }}
+              className="overflow-hidden rounded-xl border border-border/70 bg-bg/35 backdrop-blur-md sm:rounded-2xl"
             >
-              <figure className="h-56 overflow-hidden border-b border-gray-700">
-                <img
-                  src={project.image}
-                  alt={project.name}
-                  className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-105"
-                />
-              </figure>
-              
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-white mb-3">{project.name}</h3>
-                <p className="text-gray-300 mb-4 line-clamp-3">{project.description}</p>
-                
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.split(', ').slice(0, 4).map((tech) => (
-                    <span 
-                      key={tech} 
-                      className="inline-block bg-gray-800 text-purple-400 border border-purple-500 px-3 py-1 rounded-full text-xs"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                  {project.technologies.split(', ').length > 4 && (
-                    <span className="inline-block bg-gray-800 text-gray-300 border border-gray-600 px-3 py-1 rounded-full text-xs">
-                      +{project.technologies.split(', ').length - 4}
-                    </span>
+              <div className="grid md:grid-cols-2">
+                <div
+                  className={`relative aspect-[16/10] overflow-hidden border-b border-border sm:aspect-[16/11] md:aspect-auto md:min-h-[280px] md:border-b-0 md:border-r lg:min-h-[320px] ${
+                    project.imageFit === "contain" ? "bg-[#0a0910]" : "bg-elevated/40"
+                  }`}
+                >
+                  {project.imageFit === "contain" ? (
+                    <div className="absolute inset-0 flex items-center justify-center p-3 sm:p-5">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="max-h-full max-w-full rounded-lg object-contain"
+                        loading="lazy"
+                      />
+                    </div>
+                  ) : (
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="h-full w-full object-cover object-center transition duration-500 hover:scale-[1.02]"
+                      loading="lazy"
+                    />
                   )}
                 </div>
-                
-                <div className="flex justify-end gap-3 mt-4">
-                  <a 
-                    href={project.githubUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 px-4 py-2 border border-gray-700 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
-                  >
-                    <FaGithub size={16} />
-                    <span>Code</span>
-                  </a>
-                  <a 
-                    href={project.liveUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 px-4 py-2 bg-purple-500 hover:bg-purple-600 rounded-md text-sm font-medium text-white transition-colors"
-                  >
-                    <ExternalLink size={16} />
-                    <span>Live Demo</span>
-                  </a>
+
+                <div className="flex flex-col justify-center p-4 sm:p-6 md:p-8">
+                  <span className="mono text-xs text-dim">{project.index}</span>
+                  {project.highlight && (
+                    <p className="mt-2 text-sm font-medium text-[#39d353] sm:mt-3">
+                      {project.highlight}
+                    </p>
+                  )}
+                  <h3 className="mt-1.5 text-xl font-semibold tracking-tight text-text sm:mt-2 sm:text-2xl md:text-3xl">
+                    {project.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted sm:mt-4 md:text-base">
+                    {project.description}
+                  </p>
+                  <p className="mono mt-4 text-[11px] leading-relaxed break-words text-dim sm:mt-5 sm:text-xs">
+                    {project.stack.join(" · ")}
+                  </p>
+                  <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 sm:mt-8">
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-10 items-center gap-1 text-sm font-medium text-text hover:text-muted"
+                    >
+                      Live <ArrowUpRight size={14} />
+                    </a>
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-10 items-center gap-1 text-sm font-medium text-muted hover:text-text"
+                    >
+                      {project.githubBe ? "Frontend" : "Code"} <ArrowUpRight size={14} />
+                    </a>
+                    {project.githubBe && (
+                      <a
+                        href={project.githubBe}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-10 items-center gap-1 text-sm font-medium text-muted hover:text-text"
+                      >
+                        Backend <ArrowUpRight size={14} />
+                      </a>
+                    )}
+                    {project.linkedin && (
+                      <a
+                        href={project.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-10 items-center gap-1 text-sm font-medium text-muted hover:text-text"
+                      >
+                        Write-up <ArrowUpRight size={14} />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </div>
     </section>
   );
-};
-
-export default Projects;
+}

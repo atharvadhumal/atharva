@@ -1,7 +1,7 @@
 {
   "name": "atharva-portfolio",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,26 +11,15 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
-    "@lottiefiles/dotlottie-react": "^0.13.2",
-    "@react-pdf/renderer": "^4.3.0",
     "@tailwindcss/vite": "^4.0.11",
-    "dotenv": "^16.4.7",
     "framer-motion": "^12.6.5",
-    "hamburger-react": "^2.5.2",
-    "lottie-react": "^2.4.1",
     "lucide-react": "^0.477.0",
-    "particles.js": "^2.0.0",
-    "pdfjs-dist": "^5.1.91",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-github-calendar": "^4.5.6",
-    "react-icons": "^5.5.0",
-    "react-parallax-tilt": "^1.7.286",
-    "react-pdf": "^9.2.1",
-    "react-router-dom": "^7.3.0",
-    "react-simple-typewriter": "^5.0.1",
+    "react-github-calendar": "^5.0.9",
+    "react-parallax-tilt": "^1.7.341",
     "tailwindcss": "^4.0.11",
-    "typewriter-effect": "^2.21.0"
+    "typewriter-effect": "^2.22.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

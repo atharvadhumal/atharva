@@ -1,66 +1,149 @@
-import React, { useState } from 'react'
-import atharvalogo from '../assets/atharvalogo.png'
-import { navItems } from '../constants/data'
-import { Squash as Hamburger } from 'hamburger-react'
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { navLinks, resumePath } from "../constants/data";
+import { useActiveSection } from "../context/ActiveSection";
 
-const Navbar = () => {
-  const [open, setOpen] = useState(false)
-  
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+  const { activeSection, setActiveSection, setTimeOfLastClick } = useActiveSection();
+
+  const select = (name) => {
+    setActiveSection(name);
+    setTimeOfLastClick(Date.now());
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth >= 768) setOpen(false);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   return (
-    <>
-      <nav className='sticky top-0 z-50'>
-        <div className=' flex justify-between items-center py-2 sm:py-3 px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12 backdrop-blur-lg border-b border-neutral-700/80'>
-          {/* logo sec */}
-          <div className='flex items-center gap-1 sm:gap-2 font-bold'>
-            <img src={atharvalogo} className='w-8 sm:w-10 md:w-12' alt="" />
-            
-          </div>
-          
-          {/* desktop menu sec */}
-          <div className='hidden md:flex md:justify-end md:flex-1 overflow-x-auto pr-2'>
-            <ul className='flex items-center md:gap-1 lg:gap-2 xl:gap-4 text-white text-sm md:text-base lg:text-lg'>
-              {navItems.map((item, index) => (
-                <li key={index} className='group flex-shrink-0'>
-                  <a
-                    href={item.href}
-                    className='py-1 px-0.5 md:px-1 lg:px-2 xl:px-3 flex items-center gap-0.5 md:gap-1 relative whitespace-nowrap'
-                  >
-                    <span className="text-xs sm:text-sm md:text-base">{item.icon}</span>
-                    <span>{item.label}</span>
-                    <span className='absolute bottom-0 left-1 right-0 h-0.5 md:h-1 bg-[#c54dff] origin-left transition-transform duration-500 ease-out scale-x-0 group-hover:scale-x-100'></span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          
-          {/* mobile hamburger menu sec */}
-          <div className='md:hidden flex items-center' onClick={() => setOpen(!open)}>
-            <Hamburger size={20} toggled={open} color='#c54dff' />
-          </div>
-        </div>
-      </nav>
-      
-      {/* Mobile sidebar sec */}
-      {open && (
-        <div className='md:hidden fixed top-[53px] left-0 right-0 bg-neutral-900/95 backdrop-blur-sm border-b border-neutral-700/80 z-40 max-h-[calc(100vh-53px)] overflow-y-auto'>
-          <ul className='flex flex-col py-4 px-6 gap-4 text-white'>
-            {navItems.map((item, index) => (
-              <li key={index} className='group'>
-                <a
-                  href={item.href}
-                  className='py-2 px-2 flex items-center gap-2 relative'
-                >
-                  {item.icon}
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </>
-  )
-}
+    <motion.header
+      initial={{ y: -24, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="fixed inset-x-0 top-0 z-50"
+    >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-bg/85 via-bg/40 to-transparent backdrop-blur-[6px] [mask-image:linear-gradient(to_bottom,black_55%,transparent)] md:h-28"
+      />
 
-export default Navbar
+      <div className="safe-top relative flex justify-center px-3 pt-4 sm:px-4 sm:pt-5">
+        <div className="flex w-full max-w-[1080px] items-center justify-between gap-3">
+          <a
+            href="#home"
+            onClick={() => select("Home")}
+            className="shrink-0 text-sm font-semibold tracking-tight text-text"
+          >
+            atharva<span className="text-dim">.dev</span>
+          </a>
+
+          <nav className="hidden items-center gap-0.5 rounded-full border border-border/60 bg-bg/40 p-1 backdrop-blur-xl md:flex">
+            {navLinks.map((link) => {
+              const active = activeSection === link.name;
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => select(link.name)}
+                  className="relative rounded-full px-3.5 py-2 text-[13px] font-medium lg:px-4"
+                >
+                  {active && (
+                    <motion.span
+                      layoutId="capsule"
+                      className="absolute inset-0 rounded-full bg-elevated/70"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <span
+                    className={`relative z-10 ${active ? "text-text" : "text-muted hover:text-text"}`}
+                  >
+                    {link.name}
+                  </span>
+                </a>
+              );
+            })}
+          </nav>
+
+          <div className="flex items-center gap-2 sm:gap-3">
+            <a
+              href={resumePath}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden rounded-full border border-border/60 bg-bg/40 px-4 py-2 text-[13px] font-medium text-text backdrop-blur-xl transition hover:border-dim sm:inline-flex"
+            >
+              Resume
+            </a>
+            <button
+              type="button"
+              aria-expanded={open}
+              aria-label={open ? "Close menu" : "Open menu"}
+              className="rounded-full border border-border/60 bg-bg/40 px-4 py-2.5 text-[13px] text-text backdrop-blur-xl md:hidden"
+              onClick={() => setOpen((v) => !v)}
+            >
+              {open ? "Close" : "Menu"}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {open && (
+          <>
+            <motion.button
+              type="button"
+              aria-label="Close menu"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-40 bg-bg/50 backdrop-blur-sm md:hidden"
+              onClick={() => setOpen(false)}
+            />
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              className="absolute inset-x-3 top-[4.5rem] z-50 max-h-[calc(100dvh-5.5rem)] overflow-y-auto rounded-2xl border border-border/60 bg-bg/85 p-3 backdrop-blur-xl sm:inset-x-4 md:hidden"
+            >
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => select(link.name)}
+                  className={`block rounded-xl px-3 py-3.5 text-sm ${
+                    activeSection === link.name
+                      ? "bg-elevated/60 text-text"
+                      : "text-muted hover:bg-elevated/50 hover:text-text"
+                  }`}
+                >
+                  {link.name}
+                </a>
+              ))}
+              <a
+                href={resumePath}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="mt-1 block rounded-xl bg-elevated/60 px-3 py-3.5 text-center text-sm text-text"
+              >
+                Resume
+              </a>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </motion.header>
+  );
+}
