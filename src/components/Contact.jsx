@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import emailjs from "@emailjs/browser";
 import { useSectionInView } from "../hooks/useSectionInView";
 import { socials } from "../constants/data";
 
@@ -13,19 +12,36 @@ export default function Contact() {
     e.preventDefault();
     setStatus("sending");
 
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-    if (!serviceId || !templateId || !publicKey) {
+    const form = formRef.current;
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
       setStatus("error");
       return;
     }
 
+    const payload = {
+      access_key: accessKey,
+      name: form.user_name.value.trim(),
+      email: form.user_email.value.trim(),
+      message: form.message.value.trim(),
+      subject: `Portfolio message from ${form.user_name.value.trim()}`,
+      from_name: "Atharva Portfolio",
+      botcheck: form.botcheck.checked,
+    };
+
     try {
-      await emailjs.sendForm(serviceId, templateId, formRef.current, { publicKey });
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      const result = await res.json();
+      if (!res.ok || !result.success) throw new Error("send failed");
       setStatus("success");
-      formRef.current.reset();
+      form.reset();
     } catch {
       setStatus("error");
     }
@@ -84,6 +100,7 @@ export default function Contact() {
           className="flex w-full min-w-0 flex-col gap-3 sm:gap-4"
         >
           <input name="user_name" required placeholder="Name" autoComplete="name" className="field" />
+          <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
           <input
             type="email"
             name="user_email"
