@@ -164,7 +164,7 @@ export const experiences = [
   },
 ];
 
-export const resumePath = "/atharva-frontend-dev.pdf";
+export const resumePath = "/atharva-resume.pdf";
 
 export const socials = {
   email: "atharvadhumal256@gmail.com",
