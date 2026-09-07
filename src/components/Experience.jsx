@@ -22,6 +22,9 @@ export default function Experience() {
         <h2 className="mt-3 text-2xl font-semibold tracking-tight text-text sm:mt-4 sm:text-3xl md:text-4xl">
           Experience
         </h2>
+        <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted sm:mt-4 sm:text-base">
+          From product teams to freelance builds — roles that shaped how I ship.
+        </p>
       </motion.div>
 
       <div className="flex flex-col">

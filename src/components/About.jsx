@@ -14,7 +14,7 @@ const GITHUB_GREEN = {
 };
 
 const highlights = [
-  { label: "Role", value: "Junior Frontend Engineer" },
+  { label: "Role", value: "Full Stack & Mobile Developer" },
   { label: "At", value: "Coincade Studios" },
   { label: "Studied", value: "B.Tech · AI & Data Science" },
 ];
@@ -64,8 +64,7 @@ export default function About() {
               Building products people enjoy using.
             </h2>
             <p className="mt-5 max-w-xl text-[0.95rem] leading-relaxed text-muted sm:mt-6 sm:text-base">
-              I ship web apps with React and Node, desktop with Electron, and mobile with React
-              Native (Expo). I build interactive experiences you fall in love with—not me, lol.
+            I ship web apps with React and Node, desktop with Electron, and mobile with React Native (Expo). I build interactive experiences you fall in love with—not me, lol.
             </p>
           </motion.div>
 
@@ -108,34 +107,46 @@ export default function About() {
           transition={{ duration: 0.5, delay: 0.08 }}
           className="mt-12 sm:mt-14"
         >
-          <p className="mono text-[11px] tracking-[0.14em] text-dim uppercase sm:text-xs">
-            Capabilities
-          </p>
+          <div className="flex items-end justify-between gap-4">
+            <p className="mono text-[11px] tracking-[0.14em] text-dim uppercase sm:text-xs">
+              Capabilities
+            </p>
+            <p className="mono text-[11px] text-dim sm:text-xs">
+              {skillGroups.reduce((n, g) => n + g.items.length, 0) + tools.length}
+            </p>
+          </div>
 
-          <div className="mt-6 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
-            {skillGroups.map((group) => (
-              <div key={group.label}>
-                <p className="text-sm font-medium text-text">{group.label}</p>
-                <ul className="mt-3 space-y-1.5">
+          <div className="mt-6 grid grid-cols-1 gap-3 sm:mt-8 sm:grid-cols-2 sm:gap-4">
+            {[...skillGroups, { label: "Tools", items: tools }].map((group, index) => (
+              <motion.div
+                key={group.label}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-24px" }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                className="min-w-0 rounded-xl border border-border/70 bg-bg/30 p-4 backdrop-blur-md sm:rounded-2xl sm:p-5"
+              >
+                <div className="flex items-baseline justify-between gap-3 border-b border-border/50 pb-3">
+                  <h3 className="text-sm font-medium tracking-tight text-text sm:text-base">
+                    {group.label}
+                  </h3>
+                  <span className="mono shrink-0 text-[11px] text-dim">
+                    {String(index + 1).padStart(2, "0")} · {group.items.length}
+                  </span>
+                </div>
+
+                <ul className="mt-3.5 flex flex-wrap gap-2 sm:mt-4">
                   {group.items.map((item) => (
-                    <li key={item} className="text-sm text-dim">
+                    <li
+                      key={item}
+                      className="max-w-full rounded-lg border border-border/60 bg-elevated/40 px-2.5 py-1.5 text-[12px] leading-snug break-words text-muted transition hover:border-dim hover:text-text sm:px-3 sm:text-[13px]"
+                    >
                       {item}
                     </li>
                   ))}
                 </ul>
-              </div>
+              </motion.div>
             ))}
-
-            <div>
-              <p className="text-sm font-medium text-text">Tools</p>
-              <ul className="mt-3 space-y-1.5">
-                {tools.map((item) => (
-                  <li key={item} className="text-sm text-dim">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
         </motion.div>
 

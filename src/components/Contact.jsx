@@ -66,7 +66,8 @@ export default function Contact() {
             Let&apos;s work together
           </h2>
           <p className="mt-3 max-w-md text-[0.95rem] text-muted sm:mt-4 sm:text-base">
-            Have a project or opportunity? Drop a message — I usually reply within a day.
+            Open to frontend and full-stack roles — Electron, React Native, React/Next.js, or
+            realtime product work. Drop a message; I usually reply within a day.
           </p>
 
           <ul className="mt-8 space-y-4 text-sm sm:mt-10">

@@ -12,9 +12,8 @@ export const navLinks = [
 ];
 
 export const typewriterStrings = [
-  "Junior Frontend Engineer",
+  "Electron · React Native · Expo",
   "Full Stack Developer",
-  "React & TypeScript",
   "Product-minded builder",
 ];
 
@@ -29,31 +28,54 @@ export const skills = [
   "Node.js",
   "Express",
   "PostgreSQL",
-  "Neon",
+  "NeonDB",
   "Prisma",
+  "Redis",
   "WebRTC",
   "WebSockets",
+  "mediasoup",
   "JWT",
   "Tailwind",
   "Docker",
   "Git",
   "GitHub Actions CI/CD",
+  "Turborepo",
   "Vercel",
-  "Render",
+  "Render"
 ];
 
 export const skillGroups = [
   {
     label: "Frontend",
-    items: ["React", "TypeScript", "Next.js", "Vite", "Tailwind", "React Native", "Expo", "Electron"],
+    items: [
+      "React",
+      "TypeScript",
+      "Next.js",
+      "Vite",
+      "Tailwind",
+      "Framer Motion",
+      "React Native",
+      "Expo",
+      "Electron",
+    ],
   },
   {
     label: "Backend",
-    items: ["Node.js", "Express", "PostgreSQL", "Neon", "Prisma", "WebRTC", "WebSockets", "JWT"],
+    items: [
+      "Node.js",
+      "Express",
+      "PostgreSQL",
+      "Prisma",
+      "Redis",
+      "WebRTC",
+      "WebSockets",
+      "mediasoup",
+      "JWT",
+    ],
   },
   {
     label: "Platform",
-    items: ["Docker", "Git", "GitHub Actions", "Vercel", "Render"],
+    items: ["Docker", "Turborepo", "GitHub Actions", "EAS", "Vercel", "DigitalOcean"],
   },
 ];
 
@@ -66,7 +88,6 @@ export const tools = [
   "Chrome DevTools",
   "Slack",
   "Vercel",
-  "Render",
 ];
 
 export const projects = [
@@ -78,7 +99,7 @@ export const projects = [
     highlight: "Whiteboard + video call, same tab",
     image: canvasrtc,
     imageFit: "contain",
-    stack: ["React", "TypeScript", "WebRTC", "WebSockets", "Node.js", "Prisma", "PostgreSQL"],
+    stack: ["React", "TypeScript", "WebRTC", "WebSockets", "Node.js", "Prisma", "PostgreSQL", "tldraw"],
     live: "https://canvas-rtc-fe.vercel.app",
     github: "https://github.com/atharvadhumal/canvasRTC-fe",
     githubBe: "https://github.com/atharvadhumal/canvasRTC-be",
@@ -100,15 +121,28 @@ export const projects = [
 export const experiences = [
   {
     year: "Jun 2025 – Present",
-    title: "Junior Frontend Engineer",
-    place: "Coincade Studios",
+    title: "Full Stack & Mobile Developer",
+    place: "Coincade Studios · Mumbai, Maharashtra",
     detail:
-      "Building and shipping frontend features in a product team — React interfaces, polished UI, and day-to-day collaboration on real client work.",
+      "Joined as a frontend developer and transitioned into full-stack and mobile app development — Electron desktop, React Native/Expo, microservices/CI, and Next.js brand sites.",
     highlights: [
-      "Ship React UI features for production products",
-      "Collaborate with design and backend on clear, usable flows",
-      "Iterate on performance, accessibility, and component quality",
+      "Electron desktop (React, TypeScript, electron-vite, Tailwind): auth, workspaces, channels/DMs/threads, presence, search, rich text, secure credentials, persistence, OS notifications, auto-updates, and Windows/macOS/Linux packaging",
+      "Expo/React Native mobile (Expo Router, TanStack Query, NativeWind, EAS): auth, workspaces, chat, push notifications, and staging/production APIs aligned with desktop",
+      "Realtime messaging and voice/video huddles via REST/WebSockets, mediasoup-client, and react-native-webrtc — live calls, screen share, reconnect handling",
+      "Turborepo Node.js/TypeScript microservices (Express, Prisma/PostgreSQL, Redis, Docker) and GitHub Actions CI/CD: tests, path-filtered builds, migrations, staging/production deploys",
+      "Next.js marketing sites (React, TypeScript, Tailwind) including bilingual EN/FR with next-intl, Framer Motion, SEO, Google Maps, and contact flows",
     ],
+  },
+  {
+    year: "May – Jun 2025",
+    title: "Frontend Developer Intern",
+    place: "Appaxon Solutions · Remote",
+    detail:
+      "Led front-end work on KodeLayout — the marketplace’s first reusable HTML template — from requirements through responsive layout systems, reusable UI sections, and production handoff under tight timelines.",
+    highlights: [
+      "Collaborated with teammates and mentors on scope and review cycles, iterating on semantic HTML, CSS, and UI polish to meet release standards",
+    ],
+    link: "https://lnkd.in/p/dHUMWW67",
   },
   {
     year: "May 2025",
@@ -116,14 +150,6 @@ export const experiences = [
     place: "New Horizon Institute of Technology & Management",
     detail:
       "Graduated with a B.Tech in Artificial Intelligence and Data Science (Thane, Maharashtra) — combining coursework with real product and freelance work.",
-  },
-  {
-    year: "Apr – May 2025",
-    title: "Frontend Intern",
-    place: "Appaxon Solutions",
-    detail:
-      "Led front-end work on KodeLayout — the first HTML template for their marketplace — from initial build through requirement specs. Collaborated with the team, shipped under tight timelines, and grew in web development and design.",
-    link: "https://lnkd.in/p/dHUMWW67",
   },
   {
     year: "Feb 2025",

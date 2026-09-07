@@ -1,14 +1,14 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import Typewriter from "typewriter-effect";
 import { ArrowDownRight } from "lucide-react";
-import { typewriterStrings } from "../constants/data";
+import { resumePath, typewriterStrings } from "../constants/data";
 import { useSectionInView } from "../hooks/useSectionInView";
 
 const codeLines = [
   { n: "01", parts: [{ t: "const ", c: "keyword" }, { t: "dev ", c: "plain" }, { t: "= ", c: "plain" }, { t: "{", c: "plain" }] },
   { n: "02", parts: [{ t: "  name: ", c: "plain" }, { t: "'Atharva Dhumal'", c: "string" }, { t: ",", c: "plain" }] },
-  { n: "03", parts: [{ t: "  role: ", c: "plain" }, { t: "'Full Stack'", c: "string" }, { t: ",", c: "plain" }] },
-  { n: "04", parts: [{ t: "  stack: ", c: "plain" }, { t: "['React', 'Node']", c: "string" }, { t: ",", c: "plain" }] },
+  { n: "03", parts: [{ t: "  role: ", c: "plain" }, { t: "'Full Stack & Mobile Developer'", c: "string" }, { t: ",", c: "plain" }] },
+  { n: "04", parts: [{ t: "  stack: ", c: "plain" }, { t: "['React', 'Node', 'Electron', 'Expo']", c: "string" }, { t: ",", c: "plain" }] },
   { n: "05", parts: [{ t: "  ship: ", c: "plain" }, { t: "() => ", c: "plain" }, { t: "'clean + reliable'", c: "string" }] },
   { n: "06", parts: [{ t: "}", c: "plain" }] },
 ];
@@ -75,7 +75,8 @@ export default function Hero() {
             transition={{ delay: 0.3 }}
             className="mt-5 max-w-md text-[0.95rem] leading-relaxed text-dim sm:mt-6 sm:text-base md:text-lg"
           >
-            Building clean interfaces and reliable backends — shipped with care.
+            Junior frontend engineer building Electron, React Native, and Next.js products —
+            realtime collaboration, WebRTC, and brand sites shipped with care.
           </motion.p>
 
           <motion.div
@@ -90,6 +91,14 @@ export default function Hero() {
             >
               View work
               <ArrowDownRight size={16} />
+            </a>
+            <a
+              href={resumePath}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center rounded-full border border-border px-5 py-2.5 text-sm font-medium text-muted transition hover:border-dim hover:text-text sm:px-6 sm:py-3"
+            >
+              Resume
             </a>
             <a
               href="#contact"
