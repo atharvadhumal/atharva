@@ -1,123 +1,103 @@
-# Atharva Dhumal - Personal Portfolio
+# Atharva Dhumal — Portfolio
 
-## 📋 Overview
+Personal portfolio of Atharva Dhumal, a full stack and mobile developer working with React, Node.js, Electron, and React Native (Expo). It's a single-page site with a dark, minimal design that showcases projects, experience, skills, and a way to get in touch.
 
-A modern, responsive personal portfolio website built with React.js and Vite to showcase my projects, skills, and experience. This portfolio features a clean design with interactive elements, animations, and a dark theme with purple accents.
+## Sections
 
-## 🌟 Features
+- **Home** — intro with a typewriter role line, an animated code panel, and links to work, resume, and contact
+- **About** — short bio, role snapshot, grouped skills and tools, and a GitHub contribution calendar with a year switcher
+- **Work** — project cards with cover images, tech stack, and live / code links
+- **Journey** — experience timeline: Coincade Studios, Appaxon Solutions, B.Tech graduation, and freelance work
+- **Contact** — email, GitHub, and LinkedIn links plus a contact form powered by [Web3Forms](https://web3forms.com)
 
-- **Responsive Design**: Fully responsive layout optimized for all device sizes
-- **Interactive UI**: Engaging user interface with animations and interactive elements
-- **Multi-Page Architecture**: Organized content across multiple pages with smooth navigation
-- **Dark Theme**: Modern dark theme with purple accent colors
-- **GitHub Activity**: Visual representation of GitHub contributions
-- **Skills Showcase**: Visual display of technical skills and tools
-- **Parallax Effects**: Subtle parallax effects for visual depth
-- **Animated Elements**: Typewriter effect and Lottie animations
+## Featured projects
 
-## 🛠️ Technologies Used
+| Project | What it is | Links |
+| --- | --- | --- |
+| **Noir** | Real-time mobile chat app (Expo, Socket.IO, Express, Prisma) | [App](https://github.com/atharvadhumal/noir-chatApp) · [Backend](https://github.com/atharvadhumal/noir-backend-chatApp) |
+| **CanvasRTC** | Collaborative whiteboard with built-in WebRTC video calls | [Live](https://canvas-rtc-fe.vercel.app) · [Frontend](https://github.com/atharvadhumal/canvasRTC-fe) · [Backend](https://github.com/atharvadhumal/canvasRTC-be) |
+| **Nexus Engineering** | Freelance company website | [Live](https://www.nexus-eng.in/) · [Code](https://github.com/atharvadhumal/Nexus) |
 
-- **React.js**: Frontend library for building the user interface
-- **Vite**: Next-generation frontend build tool
-- **Tailwind CSS**: Utility-first CSS framework for styling
-- **React Router**: For page navigation and routing
-- **Lottie Animations**: For engaging visual animations
-- **React Icons**: For incorporating various icon sets
-- **React GitHub Calendar**: For displaying GitHub contribution graph
-- **React Parallax Tilt**: For parallax tilt effects
-- **Typewriter Effect**: For text typing animations
+## Tech stack
 
-## 📱 Pages
+- **React 18** and **Vite 6**
+- **Tailwind CSS 4** via `@tailwindcss/vite`
+- **Framer Motion** for scroll and entrance animations
+- **lucide-react** for icons
+- **react-github-calendar** for the contribution graph
+- **typewriter-effect** for the hero role line
+- **Web3Forms** for contact form submissions
+- Deployed on **Vercel**
 
-- **Home**: Introduction and brief overview
-- **About**: Detailed information about me, skills, and tools
-- **Projects**: Showcase of my projects and work
-- **Resume**: Professional experience and education
-- **Contact**: Ways to get in touch with me
+## Getting started
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js (v16.0 or higher recommended)
-- npm or yarn
-
-### Installation
-
-1. Clone the repository
-   ```bash
-   git clone https://github.com/atharvadhumal/portfolio.git
-   cd portfolio
-   ```
-
-2. Install dependencies
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
-
-3. Start the development server
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
-
-4. Open your browser and navigate to `http://localhost:5173`
-
-## 🏗️ Build
-
-To build the project for production:
+Requires Node.js 18 or newer.
 
 ```bash
-npm run build
-# or
-yarn build
+git clone https://github.com/atharvadhumal/atharva.git
+cd atharva
+npm install
+cp .env.example .env
+npm run dev
 ```
 
-The build files will be generated in the `dist` directory.
+Then open [http://localhost:5173](http://localhost:5173).
 
-## 🔍 Project Structure
+### Environment variables
+
+| Variable | Purpose |
+| --- | --- |
+| `VITE_WEB3FORMS_ACCESS_KEY` | Access key for the contact form. Get one free at [web3forms.com](https://web3forms.com). Without it, the form shows an error and visitors are asked to email directly. |
+
+## Scripts
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the development server |
+| `npm run build` | Build for production into `dist/` |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint` | Run ESLint |
+
+## Project structure
 
 ```
-portfolio/
+atharva/
 ├── public/
+│   ├── atharvaDhumal-resume.pdf   # served by the Resume buttons
+│   └── favicon.png
 ├── src/
-│   ├── assets/           # Images, icons, and other static assets
-│   ├── components/       # React components
-│   │   ├── About/        # About page components
-│   │   ├── Home/         # Home page components
-│   │   └── Lottie/       # Lottie animation files
-│   ├── constants/        # Constant data files
-│   ├── layout/           # Layout components
-│   ├── App.jsx           # Main App component with routing
-│   ├── index.css         # Global styles
-│   └── main.jsx          # Entry point
-├── .gitignore
-├── index.html
-├── package.json
-├── README.md
+│   ├── assets/                    # project covers and images
+│   ├── components/                # Navbar, Hero, About, Projects, Experience, Contact, Footer, StarField
+│   ├── constants/data.js          # all site content: projects, experience, skills, links
+│   ├── context/ActiveSection.jsx  # tracks the active nav section
+│   ├── hooks/useSectionInView.js  # updates the active section on scroll
+│   ├── App.jsx
+│   ├── index.css                  # theme tokens and global styles
+│   └── main.jsx
+├── vercel.json
 └── vite.config.js
 ```
 
-## 📈 Future Enhancements
+## Updating content
 
-- Add more projects to the portfolio
-- Implement dark/light theme toggle
-- resume section and download resume button
+Almost everything on the site lives in `src/constants/data.js`:
 
-## 📞 Contact
+- **Add a project:** add an entry to `projects`. Put the cover image in `src/assets/`, import it at the top of the file, and set `image`. Optional fields: `live`, `liveLabel`, `github`, `githubBe`, `linkedin`, `points`, `imageFit: "contain"`, and `imageBg`.
+- **Add experience:** add an entry to `experiences`.
+- **Edit skills:** update `skillGroups` and `tools`.
+- **Replace the resume:** put the new PDF in `public/` and update `resumePath`.
 
-- **LinkedIn**: [atharvadhumal24](http://www.linkedin.com/in/atharvadhumal24)
-- **GitHub**: [atharvadhumal](https://github.com/atharvadhumal)
-- **Twitter**: [@adhumal6](https://x.com/adhumal6)
-- **Email**: [atharvadhumal256@gmail.com](mailto:atharvadhumal256@gmail.com)
+## Deployment
 
-## 📄 License
+The site deploys on Vercel using `vercel.json` (Vite framework, `npm run build`, output in `dist`). Add `VITE_WEB3FORMS_ACCESS_KEY` in the Vercel project's environment variables so the contact form works in production.
 
-This project is open source and available under the [MIT License](LICENSE).
+## Contact
+
+- **Email:** [atharvadhumal256@gmail.com](mailto:atharvadhumal256@gmail.com)
+- **LinkedIn:** [atharvadhumal24](https://www.linkedin.com/in/atharvadhumal24)
+- **GitHub:** [atharvadhumal](https://github.com/atharvadhumal)
+- **X:** [@adhumal6](https://x.com/adhumal6)
 
 ---
 
-© 2025 Atharva Dhumal. All rights reserved.
+© 2026 Atharva Dhumal
