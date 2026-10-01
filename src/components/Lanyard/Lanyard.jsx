@@ -45,14 +45,14 @@ export default function Lanyard({
     <div className={className}>
       <Canvas
         camera={{ position, fov }}
-        dpr={[1, isMobile ? 1.5 : 2]}
-        gl={{ alpha: true }}
+        dpr={[1, isMobile ? 3 : 2]}
+        gl={{ alpha: true, antialias: true }}
         style={{ touchAction: "pan-y" }}
         onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), 0)}
       >
         <CameraFit baseZ={position[2]} />
         <ambientLight intensity={Math.PI} />
-        <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
+        <Physics gravity={gravity} timeStep={1 / 60}>
           <Band
             isMobile={isMobile}
             frontImage={frontImage}
@@ -155,6 +155,11 @@ function Band({
     composite.colorSpace = THREE.SRGBColorSpace;
     composite.flipY = baseMap.flipY;
     composite.anisotropy = 16;
+    // The card renders at roughly half the atlas resolution, where trilinear
+    // mipmapping visibly softens text and the photo; bilinear stays crisp.
+    composite.generateMipmaps = false;
+    composite.minFilter = THREE.LinearFilter;
+    composite.magFilter = THREE.LinearFilter;
     composite.needsUpdate = true;
     return composite;
   }, [frontTex, backTex, materials.base.map]);
@@ -263,8 +268,8 @@ function Band({
                 map-anisotropy={16}
                 clearcoat={isMobile ? 0 : 1}
                 clearcoatRoughness={0.15}
-                roughness={0.9}
-                metalness={0.8}
+                roughness={0.6}
+                metalness={0.3}
               />
             </mesh>
             <mesh geometry={nodes.clip.geometry} material={materials.metal} material-roughness={0.3} />
