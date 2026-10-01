@@ -17,8 +17,8 @@ export default function Hero() {
 
   return (
     <section ref={ref} id="home" className="relative min-h-[100svh]">
-      <div className="shell relative grid min-h-[100svh] items-center gap-8 py-24 sm:gap-10 sm:py-28 md:grid-cols-[1.05fr_0.95fr] md:gap-12 md:py-24 lg:gap-16">
-        <motion.div style={{ opacity: fade }} className="max-w-xl">
+      <div className="shell relative md:static grid min-h-[100svh] items-center gap-8 py-24 sm:gap-10 sm:py-28 md:grid-cols-[1.05fr_0.95fr] md:gap-12 md:py-24 lg:gap-16">
+        <motion.div style={{ opacity: fade }} className="relative z-10 max-w-xl">
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
