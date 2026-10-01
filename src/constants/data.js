@@ -1,5 +1,6 @@
 import canvasrtc from "../assets/canvasrtc.jpg";
 import nexus from "../assets/nexus.png";
+import noirCover from "../assets/Noir_cover.png";
 
 export const GITHUB_USERNAME = "atharvadhumal";
 
@@ -93,6 +94,35 @@ export const tools = [
 export const projects = [
   {
     index: "01",
+    title: "Noir",
+    description:
+      "Real-time mobile chat app in an all-black theme. Find people, send and accept friend requests, and chat 1:1 live with typing indicators, read status, and instant conversation updates over Socket.IO. Includes push notifications, an in-app notification center, and a random avatar generator.",
+    highlight: "Expo app · Render backend",
+    image: noirCover,
+    imageFit: "contain",
+    imageBg: "#000000",
+    stack: [
+      "React Native",
+      "Expo",
+      "TypeScript",
+      "Socket.IO",
+      "Express",
+      "Prisma",
+      "PostgreSQL",
+      "Better Auth",
+    ],
+    points: [
+      "Expo Router frontend with TanStack Query optimistic updates and Better Auth sessions stored in SecureStore",
+      "Express + Prisma/PostgreSQL backend with socket session auth, a friend graph, and friends-only conversations",
+      "Backend deployed on Render with Neon Postgres; Android builds shipped with EAS",
+    ],
+    live: "https://drive.google.com/file/d/1r9Bv2KbvVtFH54ezlZw68csBbx2wdQlm/view?usp=sharing",
+    liveLabel: "Android App",
+    github: "https://github.com/atharvadhumal/noir-chatApp",
+    githubBe: "https://github.com/atharvadhumal/noir-backend-chatApp",
+  },
+  {
+    index: "02",
     title: "CanvasRTC",
     description:
       "Real-time collaboration in one browser workspace — infinite whiteboard and P2P HD video/audio together. Create or join rooms with a share code, live cursors, mesh WebRTC for up to 4 peers, presence, and auto-saved boards. Built for focused brainstorming, design reviews, and small-team workshops — no installs, no tab switching.",
@@ -106,7 +136,7 @@ export const projects = [
     linkedin: "https://lnkd.in/p/dMSenSuh",
   },
   {
-    index: "02",
+    index: "03",
     title: "Nexus Engineering",
     description:
       "Freelance multi-page company website for Nexus Engineering — React, Vite, and Tailwind with clear routing for Home, About, Services, and Contact. Deployed and hosted on Hostinger.",
@@ -164,7 +194,7 @@ export const experiences = [
   },
 ];
 
-export const resumePath = "/atharva-resume.pdf";
+export const resumePath = "/atharvaDhumal-resume.pdf";
 
 export const socials = {
   email: "atharvadhumal256@gmail.com",

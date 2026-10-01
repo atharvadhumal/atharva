@@ -1,9 +1,15 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, MonitorSmartphone, Globe2 } from "lucide-react";
+import { ArrowUpRight, MonitorSmartphone, Globe2, MessagesSquare } from "lucide-react";
 import { useSectionInView } from "../hooks/useSectionInView";
 import { projects } from "../constants/data";
 
 const accents = {
+  chat: {
+    icon: MessagesSquare,
+    gradient:
+      "radial-gradient(ellipse 75% 55% at 15% 15%, rgba(250,250,250,0.10), transparent 55%), radial-gradient(ellipse 65% 50% at 90% 85%, rgba(57,211,83,0.10), transparent 50%), #050505",
+    label: "Mobile · Realtime · Backend",
+  },
   comm: {
     icon: MonitorSmartphone,
     gradient:
@@ -25,6 +31,7 @@ function ProjectVisual({ project }) {
         className={`relative aspect-[16/10] overflow-hidden border-b border-border sm:aspect-[16/11] md:aspect-auto md:min-h-[280px] md:border-b-0 md:border-r lg:min-h-[320px] ${
           project.imageFit === "contain" ? "bg-[#0a0910]" : "bg-elevated/40"
         }`}
+        style={project.imageBg ? { background: project.imageBg } : undefined}
       >
         {project.imageFit === "contain" ? (
           <div className="absolute inset-0 flex items-center justify-center p-3 sm:p-5">
@@ -86,7 +93,8 @@ function ProjectVisual({ project }) {
 
 function ProjectLinks({ project }) {
   const links = [];
-  if (project.live) links.push({ href: project.live, label: "Live", primary: true });
+  if (project.live)
+    links.push({ href: project.live, label: project.liveLabel || "Live", primary: true });
   if (project.github)
     links.push({
       href: project.github,
@@ -144,7 +152,7 @@ export default function Projects() {
             Selected projects
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-muted sm:mt-4 sm:text-base">
-            Selected builds — realtime collaboration and client websites.
+            Selected builds — mobile chat, realtime collaboration, and client websites.
           </p>
         </motion.div>
 
