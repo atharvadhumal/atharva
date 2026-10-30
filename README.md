@@ -63,7 +63,7 @@ Then open [http://localhost:5173](http://localhost:5173).
 ```
 atharva/
 ├── public/
-│   ├── atharvaDhumal-resume.pdf   # served by the Resume buttons
+│   ├── atharvaDhumal-cv.pdf       # served by the Resume buttons
 │   └── favicon.png
 ├── src/
 │   ├── assets/                    # project covers and images
@@ -94,7 +94,7 @@ The site deploys on Vercel using `vercel.json` (Vite framework, `npm run build`,
 ## Contact
 
 - **Email:** [atharvadhumal256@gmail.com](mailto:atharvadhumal256@gmail.com)
-- **LinkedIn:** [atharvadhumal24](https://www.linkedin.com/in/atharvadhumal24)
+- **LinkedIn:** [atharvad24](https://www.linkedin.com/in/atharvad24/)
 - **GitHub:** [atharvadhumal](https://github.com/atharvadhumal)
 - **X:** [@adhumal6](https://x.com/adhumal6)
 

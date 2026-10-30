@@ -74,7 +74,7 @@ export default function Contact() {
             {[
               { label: "Email", value: socials.email, href: `mailto:${socials.email}` },
               { label: "GitHub", value: "atharvadhumal", href: socials.github },
-              { label: "LinkedIn", value: "atharvadhumal24", href: socials.linkedin },
+              { label: "LinkedIn", value: "atharvad24", href: socials.linkedin },
             ].map((item) => (
               <li key={item.label} className="min-w-0">
                 <span className="mono text-[11px] text-dim uppercase">{item.label}</span>

@@ -194,10 +194,10 @@ export const experiences = [
   },
 ];
 
-export const resumePath = "/atharvaDhumal-resume.pdf";
+export const resumePath = "/atharvaDhumal-cv.pdf";
 
 export const socials = {
   email: "atharvadhumal256@gmail.com",
   github: "https://github.com/atharvadhumal",
-  linkedin: "http://www.linkedin.com/in/atharvadhumal24",
+  linkedin: "https://www.linkedin.com/in/atharvad24/",
 };
